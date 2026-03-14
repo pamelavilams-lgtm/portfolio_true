@@ -22,8 +22,8 @@ type RevealProps = PropsWithChildren<{
   staggerChildren?: number;
 }>;
 
-const easeOutExpo = [0.16, 1, 0.3, 1];
-const easeOutQuint = [0.22, 1, 0.36, 1];
+const easeOutExpo = [0.16, 1, 0.3, 1] as const;
+const easeOutQuint = [0.22, 1, 0.36, 1] as const;
 
 function getVariants(
   variant: RevealVariant,
