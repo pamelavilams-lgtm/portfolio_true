@@ -4,6 +4,9 @@
   padding: 1.5rem 0 3rem;
 }
 
+/* ============================================
+   Utility Bar
+   ============================================ */
 .utilityBar {
   position: sticky;
   top: 1rem;
@@ -13,18 +16,29 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.9rem 1rem;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: 999px;
-  background: rgba(251, 248, 243, 0.78);
+  background: var(--bg-glass);
   backdrop-filter: blur(16px);
-  box-shadow: 0 10px 40px rgba(92, 79, 66, 0.08);
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-base);
+}
+
+.utilityBar:hover {
+  border-color: var(--border-glow);
+}
+
+.utilityActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .utilityLink,
 .textLink,
 .projectLink {
   position: relative;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   transition: color var(--transition-base);
 }
 
@@ -54,7 +68,7 @@
 .utilityLink:hover,
 .textLink:hover,
 .projectLink:hover {
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 .utilityLink:hover::after,
@@ -63,26 +77,41 @@
   transform: scaleX(1);
 }
 
+.utilityLink:focus-visible,
+.textLink:focus-visible,
+.projectLink:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
 .utilityNote {
-  color: var(--ink-faint);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+/* ============================================
+   Resume Shell - Premium card
+   ============================================ */
 .resumeShell {
   margin-top: 1.35rem;
   padding: clamp(1.35rem, 3vw, 2.4rem);
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: 2rem;
-  background:
-    radial-gradient(circle at top left, rgba(139, 183, 188, 0.1), transparent 22%),
-    radial-gradient(circle at 85% 16%, rgba(214, 169, 141, 0.12), transparent 24%),
-    rgba(255, 255, 255, 0.62);
-  box-shadow: var(--shadow-soft);
+  background: var(--resume-shell-bg);
+  box-shadow: var(--shadow-lg);
+  transition: border-color var(--transition-slow);
 }
 
+.resumeShell:hover {
+  border-color: var(--border-glow);
+}
+
+/* ============================================
+   Header
+   ============================================ */
 .header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(10rem, 14rem);
@@ -97,7 +126,7 @@
 
 .kicker,
 .sectionTitle {
-  color: var(--ink-faint);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -108,6 +137,7 @@
 }
 
 .name {
+  color: var(--text-primary);
   font-size: clamp(2.4rem, 5vw, 4rem);
   line-height: 0.94;
   letter-spacing: -0.06em;
@@ -115,6 +145,7 @@
 
 .headline {
   max-width: 36rem;
+  color: var(--text-primary);
   font-size: 1.12rem;
   line-height: 1.58;
 }
@@ -126,7 +157,7 @@
 .contactNote,
 .inlineList,
 .bulletList {
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   line-height: 1.68;
 }
 
@@ -148,27 +179,46 @@
   font-size: 0.95rem;
 }
 
+/* ============================================
+   Portrait Frame
+   ============================================ */
 .portraitFrame {
   position: relative;
   width: 100%;
   aspect-ratio: 0.82;
   overflow: hidden;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: 1.5rem;
-  background: linear-gradient(180deg, rgba(249, 244, 237, 0.9), rgba(237, 230, 220, 0.72));
-  box-shadow: 0 18px 48px rgba(90, 74, 58, 0.14);
+  background: var(--portrait-frame-bg);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--transition-slow),
+    border-color var(--transition-base);
+}
+
+.portraitFrame:hover {
+  transform: scale(1.01);
+  border-color: var(--border-glow);
 }
 
 .portrait {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--transition-slower);
 }
 
+.portraitFrame:hover .portrait {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   Sections
+   ============================================ */
 .section {
   margin-top: 2.25rem;
   padding-top: 1.35rem;
-  border-top: 1px solid rgba(22, 23, 26, 0.1);
+  border-top: 1px solid var(--border-default);
 }
 
 .sectionTitle {
@@ -197,6 +247,7 @@
 }
 
 .itemTitle {
+  color: var(--text-primary);
   font-size: 1.08rem;
   line-height: 1.38;
 }
@@ -206,9 +257,9 @@
   align-items: center;
   min-height: 1.9rem;
   padding: 0 0.7rem;
-  border: 1px solid rgba(22, 23, 26, 0.1);
+  border: 1px solid var(--border-default);
   border-radius: 999px;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-family: var(--font-mono), monospace;
   font-size: 0.68rem;
   letter-spacing: 0.06em;
@@ -226,7 +277,7 @@
 }
 
 .period {
-  color: var(--ink-faint);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   font-size: 0.76rem;
   letter-spacing: 0.06em;
@@ -242,10 +293,17 @@
   margin-top: 0.42rem;
 }
 
+.bulletList li::marker {
+  color: var(--accent-primary);
+}
+
 .projectLink {
   white-space: nowrap;
 }
 
+/* ============================================
+   Responsive Breakpoints
+   ============================================ */
 @media (max-width: 720px) {
   .page {
     width: min(100vw - 1rem, 980px);
@@ -257,8 +315,20 @@
     position: static;
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.75rem;
     padding: 0.8rem 0.9rem;
     border-radius: 1.3rem;
+  }
+
+  .utilityActions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .utilityNote {
+    display: none;
   }
 
   .resumeShell {
@@ -300,6 +370,9 @@
   }
 }
 
+/* ============================================
+   Print Styles - Force Light Theme
+   ============================================ */
 @media print {
   .page {
     width: 100%;
@@ -334,22 +407,22 @@
     padding-top: 0.9rem;
   }
 
-  .name {
-    font-size: 2.2rem;
+  /* Force light theme colors for print */
+  .name,
+  .headline,
+  .itemTitle {
+    color: #16171a !important;
   }
 
-  .headline {
-    font-size: 1rem;
-  }
-
-  .textLink,
+  .summary,
+  .itemMeta,
+  .projectNote,
+  .supportingNote,
   .contactNote,
   .inlineList,
-  .projectNote,
-  .summary,
   .bulletList,
-  .itemMeta {
-    color: #202124;
+  .textLink {
+    color: #54585f !important;
     font-size: 0.9rem;
     line-height: 1.48;
   }
@@ -359,13 +432,20 @@
   }
 
   .levelTag,
-  .projectLink {
-    color: #202124;
-    border-color: rgba(32, 33, 36, 0.22);
+  .projectLink,
+  .kicker,
+  .sectionTitle,
+  .period {
+    color: #54585f !important;
+    border-color: rgba(22, 23, 26, 0.15) !important;
   }
 
   .textLink::after,
   .projectLink::after {
     display: none;
+  }
+
+  .section {
+    border-color: rgba(22, 23, 26, 0.1) !important;
   }
 }

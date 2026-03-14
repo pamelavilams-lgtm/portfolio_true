@@ -1,23 +1,34 @@
+/* Page Styles */
 .page {
   width: var(--page-width);
   margin: 0 auto;
   padding: 1.5rem 0 3rem;
 }
 
+/* ============================================
+   Topbar - Enhanced blur with border glow
+   ============================================ */
 .topbar {
   position: sticky;
   top: 1rem;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
   gap: 1.4rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  padding: 0.85rem 1.25rem;
+  border: 1px solid var(--border-default);
   border-radius: 999px;
-  background: rgba(251, 248, 243, 0.78);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 10px 40px rgba(92, 79, 66, 0.08);
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 var(--topbar-inset-glow);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.topbar:hover {
+  border-color: var(--border-glow);
 }
 
 .brand {
@@ -26,6 +37,7 @@
 }
 
 .brandName {
+  color: var(--text-primary);
   font-size: 0.96rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -34,7 +46,7 @@
 
 .brandRole {
   max-width: 30rem;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 0.82rem;
   line-height: 1.35;
 }
@@ -56,7 +68,7 @@
 
 .navLink,
 .contactButton {
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-family: var(--font-mono), monospace;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
@@ -87,7 +99,7 @@
 .contactButton:focus-visible,
 .buildLink:focus-visible,
 .contactValue:focus-visible {
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 .navLink:hover::after,
@@ -106,11 +118,14 @@
 .buildLink:focus-visible,
 .contactValue:focus-visible,
 .profileGithub:focus-visible {
-  outline: 2px solid var(--accent-cool);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 3px;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
 }
 
+/* ============================================
+   Hero Section
+   ============================================ */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
@@ -132,7 +147,7 @@
 .contactLabel,
 .buildEyebrow,
 .profileLabel {
-  color: var(--ink-faint);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
@@ -142,7 +157,7 @@
 .heroPositioning {
   max-width: 32rem;
   margin-top: 1rem;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 0.98rem;
   line-height: 1.6;
 }
@@ -150,6 +165,7 @@
 .heroTitle {
   max-width: 14ch;
   margin-top: 1rem;
+  color: var(--text-primary);
   font-size: clamp(3.2rem, 7vw, 5.5rem);
   line-height: 1;
   letter-spacing: -0.05em;
@@ -159,7 +175,7 @@
 .heroDescription {
   max-width: 34rem;
   margin-top: 1.45rem;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 1.08rem;
   line-height: 1.72;
 }
@@ -189,38 +205,49 @@
 }
 
 .primaryAction {
-  background: var(--ink);
-  color: var(--paper-strong);
-  box-shadow: 0 14px 36px rgba(22, 23, 26, 0.18);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.primaryAction:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .secondaryAction {
-  border-color: rgba(22, 23, 26, 0.14);
-  background: rgba(255, 255, 255, 0.5);
+  border-color: var(--border-default);
+  background: var(--bg-surface);
+  color: var(--text-primary);
 }
 
-.primaryAction:hover,
 .secondaryAction:hover,
 .caseLink:hover {
   transform: translateY(-2px);
+  border-color: var(--border-strong);
 }
 
 .heroVisual {
   min-width: 0;
 }
 
+/* ============================================
+   Profile Stage - Premium card with depth
+   ============================================ */
 .profileStage {
   position: relative;
   min-height: clamp(36rem, 58vw, 45rem);
   padding: 1.5rem;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at top left, rgba(139, 183, 188, 0.1), transparent 24%),
-    radial-gradient(circle at 80% 20%, rgba(214, 169, 141, 0.12), transparent 30%),
-    rgba(255, 255, 255, 0.48);
-  box-shadow: var(--shadow-soft);
+  background: var(--profile-stage-bg);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
+  transition: border-color var(--transition-slow);
+}
+
+.profileStage:hover {
+  border-color: var(--border-glow);
 }
 
 .profileBackdrop {
@@ -237,15 +264,28 @@
   aspect-ratio: 0.78;
   margin: 2rem 2rem 0 auto;
   overflow: hidden;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: calc(var(--radius-xl) - 0.35rem);
-  box-shadow: 0 26px 70px rgba(74, 61, 50, 0.2);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.profilePhotoFrame:hover {
+  transform: scale(1.01);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px var(--border-glow);
 }
 
 .profilePhoto {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--transition-slower);
+}
+
+.profilePhotoFrame:hover .profilePhoto {
+  transform: scale(1.04);
 }
 
 .profilePanel {
@@ -257,11 +297,11 @@
   display: grid;
   gap: 1.25rem;
   padding: 1.25rem;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: calc(var(--radius-lg) + 0.2rem);
-  background: rgba(251, 248, 243, 0.84);
+  background: var(--bg-glass-strong);
   backdrop-filter: blur(18px);
-  box-shadow: 0 20px 48px rgba(90, 74, 58, 0.12);
+  box-shadow: var(--shadow-md);
 }
 
 .profilePanelLead {
@@ -270,13 +310,13 @@
 }
 
 .profileText {
-  color: var(--ink);
+  color: var(--text-primary);
   font-size: 1rem;
   line-height: 1.55;
 }
 
 .profileAvailability {
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 0.92rem;
   line-height: 1.6;
 }
@@ -284,19 +324,19 @@
 .profileGithub {
   display: inline-flex;
   margin-top: 0.35rem;
-  color: var(--ink-faint);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   font-size: 0.78rem;
   letter-spacing: 0.02em;
   text-decoration: underline;
-  text-decoration-color: rgba(22, 23, 26, 0.2);
+  text-decoration-color: var(--border-default);
   text-underline-offset: 0.18em;
   transition: color var(--transition-base), text-decoration-color var(--transition-base);
 }
 
 .profileGithub:hover {
-  color: var(--ink);
-  text-decoration-color: var(--ink);
+  color: var(--text-primary);
+  text-decoration-color: var(--text-primary);
 }
 
 .heroSignals {
@@ -307,10 +347,11 @@
 
 .signalCard {
   padding-top: 0.8rem;
-  border-top: 1px solid rgba(22, 23, 26, 0.12);
+  border-top: 1px solid var(--border-default);
 }
 
 .signalValue {
+  color: var(--text-primary);
   font-size: clamp(1.55rem, 3vw, 2.15rem);
   line-height: 1;
   letter-spacing: -0.05em;
@@ -318,7 +359,7 @@
 
 .signalLabel {
   margin-top: 0.45rem;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 0.84rem;
   line-height: 1.45;
 }
@@ -327,11 +368,14 @@
   max-width: 38rem;
   margin-top: 1rem;
   padding-left: 0.15rem;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 0.92rem;
   line-height: 1.6;
 }
 
+/* ============================================
+   Sections
+   ============================================ */
 .section {
   margin-top: var(--section-gap);
 }
@@ -350,6 +394,7 @@
 
 .sectionTitle {
   max-width: 18ch;
+  color: var(--text-primary);
   font-size: clamp(2rem, 4vw, 3.6rem);
   line-height: 1.02;
   letter-spacing: -0.04em;
@@ -358,7 +403,7 @@
 .sectionIntro {
   max-width: 42rem;
   margin-top: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -370,23 +415,31 @@
 .buildImpact,
 .strengthDescription,
 .contactStatement {
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
+/* ============================================
+   Cards - Unified surface language
+   ============================================ */
 .metricCard,
 .strengthCard,
 .contactLead,
 .buildCard {
   padding: 1.35rem;
-  border: 1px solid rgba(22, 23, 26, 0.1);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--bg-surface);
   box-shadow: var(--shadow-card);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .metricValue {
   margin-top: 1rem;
+  color: var(--text-primary);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   line-height: 1;
   letter-spacing: -0.05em;
@@ -397,6 +450,9 @@
   font-size: 0.94rem;
 }
 
+/* ============================================
+   Case Cards - Rich hover with depth
+   ============================================ */
 .casesGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -408,12 +464,10 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 1.5rem;
   padding: 1.5rem;
-  border: 1px solid rgba(22, 23, 26, 0.1);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-xl);
-  background: 
-    radial-gradient(circle at 5% 90%, rgba(139, 183, 188, 0.08), transparent 30%),
-    rgba(255, 255, 255, 0.6);
-  box-shadow: var(--shadow-soft);
+  background: var(--case-featured-bg);
+  box-shadow: var(--shadow-lg);
   transition:
     transform var(--transition-base),
     box-shadow var(--transition-base),
@@ -425,10 +479,10 @@
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid rgba(22, 23, 26, 0.06);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 12px 36px rgba(103, 84, 62, 0.06);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
   transition:
     transform var(--transition-base),
     box-shadow var(--transition-base),
@@ -440,28 +494,26 @@
 .buildCard:hover,
 .strengthCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(22, 23, 26, 0.18);
-  box-shadow: 0 22px 72px rgba(103, 84, 62, 0.14);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-lg);
 }
 
 .caseVisualFeatured {
   position: relative;
   min-height: 26rem;
   overflow: hidden;
-  border: 1px solid rgba(22, 23, 26, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: calc(var(--radius-xl) - 0.5rem);
-  background: linear-gradient(180deg, rgba(249, 244, 237, 0.9), rgba(237, 230, 220, 0.7));
+  background: var(--case-visual-bg);
 }
-
-
 
 .caseVisual {
   position: relative;
   min-height: 18rem;
   overflow: hidden;
-  border: 1px solid rgba(22, 23, 26, 0.06);
+  border: 1px solid var(--border-subtle);
   border-radius: calc(var(--radius-lg) - 0.25rem);
-  background: linear-gradient(180deg, rgba(249, 244, 237, 0.85), rgba(237, 230, 220, 0.6));
+  background: var(--case-visual-bg);
 }
 
 .caseImage {
@@ -488,11 +540,12 @@
 }
 
 .caseNumber {
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 .caseTitle {
   max-width: 18ch;
+  color: var(--text-primary);
   font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   line-height: 1.12;
   letter-spacing: -0.025em;
@@ -500,6 +553,7 @@
 
 .caseTitleFeatured {
   max-width: 16ch;
+  color: var(--text-primary);
   font-size: clamp(2rem, 3.5vw, 3.2rem);
   line-height: 1.02;
   letter-spacing: -0.04em;
@@ -523,9 +577,9 @@
   min-height: 2rem;
   padding: 0 0.75rem;
   border-radius: 999px;
-  border: 1px solid rgba(22, 23, 26, 0.1);
-  background: rgba(255, 255, 255, 0.52);
-  color: var(--ink-soft);
+  border: 1px solid var(--border-default);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
   font-family: var(--font-mono), monospace;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
@@ -533,7 +587,7 @@
 }
 
 .levelBadge {
-  color: var(--ink-faint);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   font-size: 0.72rem;
   letter-spacing: 0.02em;
@@ -543,10 +597,14 @@
 .caseLink {
   justify-self: start;
   margin-top: 0.45rem;
-  background: rgba(22, 23, 26, 0.04);
-  border-color: rgba(22, 23, 26, 0.12);
+  background: var(--bg-surface);
+  border-color: var(--border-default);
+  color: var(--text-primary);
 }
 
+/* ============================================
+   Builds Grid
+   ============================================ */
 .buildsGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -557,10 +615,6 @@
   display: grid;
   gap: 0.95rem;
   align-content: start;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    border-color var(--transition-base);
 }
 
 .buildMeta {
@@ -572,6 +626,7 @@
 
 .buildTitle,
 .strengthTitle {
+  color: var(--text-primary);
   font-size: clamp(1.45rem, 2.4vw, 2rem);
   line-height: 1.08;
   letter-spacing: -0.04em;
@@ -583,13 +638,16 @@
 
 .buildLink {
   justify-self: start;
-  color: var(--ink-soft);
+  color: var(--text-secondary);
   font-family: var(--font-mono), monospace;
   font-size: 0.76rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+/* ============================================
+   Strengths Grid
+   ============================================ */
 .strengthsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -598,10 +656,6 @@
 
 .strengthCard {
   min-height: 15rem;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    border-color var(--transition-base);
 }
 
 .strengthTitle {
@@ -613,6 +667,9 @@
   margin-top: 1rem;
 }
 
+/* ============================================
+   Contact Section
+   ============================================ */
 .contactSection {
   padding-bottom: 3rem;
 }
@@ -627,10 +684,7 @@
   display: grid;
   align-content: start;
   gap: 1.25rem;
-  background:
-    radial-gradient(circle at top left, rgba(139, 183, 188, 0.18), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(214, 169, 141, 0.18), transparent 32%),
-    rgba(255, 255, 255, 0.62);
+  background: var(--contact-lead-bg);
 }
 
 .contactStatement {
@@ -649,27 +703,62 @@
   grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
   gap: 1rem;
   padding: 0.95rem 0;
-  border-bottom: 1px solid rgba(22, 23, 26, 0.08);
+  border-bottom: 1px solid var(--border-default);
 }
 
 .contactValue {
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
+/* ============================================
+   Footer
+   ============================================ */
 .footer {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   padding: 1.4rem 0 1rem;
-  border-top: 1px solid rgba(22, 23, 26, 0.12);
-  color: var(--ink-faint);
+  border-top: 1px solid var(--border-default);
+  color: var(--text-disabled);
   font-family: var(--font-mono), monospace;
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-@media (max-width: 1120px) {
+/* ============================================
+   Responsive Breakpoints
+   ============================================ */
+
+/* Intermediate breakpoint for smoother transitions */
+@media (max-width: 1120px) and (min-width: 961px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.6rem, 5vw, 4rem);
+  }
+
+  .sectionHeader {
+    grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
+  }
+
+  .caseCardFeatured {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .caseTitleFeatured {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .profileStage {
+    min-height: 34rem;
+  }
+}
+
+@media (max-width: 960px) {
   .hero,
   .sectionHeader,
   .caseCardFeatured,
@@ -707,10 +796,10 @@
 
 @media (max-width: 900px) {
   .topbar {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
     grid-template-areas:
-      "brand contact"
-      "nav nav";
+      "brand toggle contact"
+      "nav nav nav";
     row-gap: 0.85rem;
   }
 
@@ -761,9 +850,17 @@
 
   .topbar {
     position: static;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand toggle"
+      "nav contact";
     gap: 0.55rem 0.85rem;
     padding: 0.75rem 0.85rem;
     border-radius: 1.25rem;
+  }
+
+  .contactButton {
+    justify-self: start;
   }
 
   .strengthsGrid,
@@ -798,16 +895,16 @@
   .contactButton {
     display: inline-flex;
     align-items: center;
-    min-height: 2.75rem;
-    padding: 0.5rem 0.85rem;
+    min-height: 3rem;
+    padding: 0.65rem 1rem;
     font-size: 0.72rem;
-    border-radius: 0.5rem;
-    background: rgba(22, 23, 26, 0.03);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
   }
 
   .navLink:hover,
   .contactButton:hover {
-    background: rgba(22, 23, 26, 0.06);
+    background: var(--bg-elevated);
   }
 
   .navLink::after,
@@ -818,7 +915,7 @@
   .buildLink,
   .contactValue {
     font-size: 0.75rem;
-    min-height: 2.75rem;
+    min-height: 3rem;
     display: inline-flex;
     align-items: center;
   }
@@ -829,7 +926,6 @@
     padding-top: 1.25rem;
   }
 
-  /* Mobile: Copy first (above fold), then visual */
   .heroCopy {
     padding: 0;
     order: 0;
@@ -955,9 +1051,9 @@
 
   .sectionIntro {
     margin-top: 0.65rem;
-  font-size: 0.95rem;
+    font-size: 0.95rem;
   }
-  
+
   .caseVisual {
     min-height: 13.5rem;
   }

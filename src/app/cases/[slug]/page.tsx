@@ -3,23 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/portfolio/breadcrumbs";
 import { Reveal } from "@/components/portfolio/reveal";
+import { ThemeToggle } from "@/components/portfolio/theme-toggle";
 import {
   getAdjacentCaseStudies,
   getCaseStudy,
   siteContent,
 } from "@/content/site-content";
 import { absoluteUrl } from "@/lib/site-url";
+import { getExternalLinkProps } from "@/lib/url-utils";
 
 import styles from "./page.module.css";
 
 type CasePageProps = {
   params: Promise<{ slug: string }>;
 };
-
-function isExternalHref(href: string) {
-  return href.startsWith("http") || href.startsWith("mailto:");
-}
 
 export async function generateStaticParams() {
   return siteContent.caseStudies.map((caseStudy) => ({
@@ -70,32 +69,55 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
   const adjacent = getAdjacentCaseStudies(slug);
 
   return (
-    <main className={styles.page} data-case-page>
-      <Reveal>
-        <Link className={styles.backLink} href="/#cases">
-          Back to portfolio
-        </Link>
+    <main id="main-content" tabIndex={-1} className={styles.page} data-case-page>
+      {/* Navigation bar */}
+      <Reveal variant="fade" duration={0.6}>
+        <div className={styles.navBar}>
+          <div className={styles.navLeft}>
+            <Link className={styles.backLink} href="/#cases">
+              Back to portfolio
+            </Link>
+            <Breadcrumbs
+              className={styles.breadcrumbs}
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Cases", href: "/#cases" },
+                { label: caseStudy.title },
+              ]}
+            />
+          </div>
+          <ThemeToggle />
+        </div>
       </Reveal>
 
+      {/* Hero section with staged entrance */}
       <section className={styles.hero}>
-        <Reveal className={styles.heroCopy}>
-          <p className={styles.eyebrow}>
-            ({caseStudy.number}) {caseStudy.eyebrow}
-          </p>
-          <h1 className={styles.heroTitle}>{caseStudy.title}</h1>
-          <p className={styles.heroSummary}>{caseStudy.summary}</p>
-          <p className={styles.heroOutcome}>{caseStudy.outcome}</p>
+        <div className={styles.heroCopy}>
+          <Reveal variant="fade" delay={0.1} duration={0.7}>
+            <p className={styles.eyebrow}>
+              ({caseStudy.number}) {caseStudy.eyebrow}
+            </p>
+          </Reveal>
 
-          <div className={styles.heroTags}>
-            {caseStudy.tags.map((tag) => (
-              <span key={tag} className={styles.tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        </Reveal>
+          <Reveal variant="blur-to-crisp" delay={0.15} duration={1}>
+            <h1 className={styles.heroTitle}>{caseStudy.title}</h1>
+          </Reveal>
 
-        <Reveal className={styles.heroVisual} delay={0.08}>
+          <Reveal variant="fade-up" delay={0.3} duration={0.8}>
+            <p className={styles.heroSummary}>{caseStudy.summary}</p>
+            <p className={styles.heroOutcome}>{caseStudy.outcome}</p>
+
+            <div className={styles.heroTags}>
+              {caseStudy.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal className={styles.heroVisual} variant="scale-in" delay={0.2} duration={1}>
           <div className={styles.imageFrame}>
             <Image
               src={caseStudy.previewImage}
@@ -109,13 +131,16 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
         </Reveal>
       </section>
 
+      {/* Content grid with cascade rhythm */}
       <section className={styles.contentGrid}>
         <div className={styles.contentColumn}>
           {caseStudy.sections.map((section, index) => (
             <Reveal
               key={section.title}
               className={styles.sectionCard}
-              delay={0.03 * index}
+              variant="fade-up"
+              delay={0.05 * index}
+              duration={0.7}
             >
               <p className={styles.sectionLabel}>{section.title}</p>
               <ul className={styles.sectionList}>
@@ -127,7 +152,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
           ))}
         </div>
 
-        <Reveal className={styles.rail} delay={0.08}>
+        <Reveal className={styles.rail} variant="fade-up" delay={0.15} duration={0.8}>
           <aside className={styles.railCard}>
             <div className={styles.railBlock}>
               <p className={styles.sectionLabel}>Quick read</p>
@@ -157,12 +182,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
                     key={artifact.label}
                     className={styles.artifactLink}
                     href={artifact.href}
-                    target={isExternalHref(artifact.href) ? "_blank" : undefined}
-                    rel={
-                      isExternalHref(artifact.href)
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
+                    {...getExternalLinkProps(artifact.href)}
                   >
                     {artifact.label}
                   </a>
@@ -173,7 +193,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
         </Reveal>
       </section>
 
-      <Reveal className={styles.navigationFooter}>
+      <Reveal className={styles.navigationFooter} variant="fade-up" delay={0.1}>
         <div className={styles.footerCard}>
           <p className={styles.sectionLabel}>Continue reading</p>
           <div className={styles.footerLinks}>

@@ -1,24 +1,21 @@
 .frame {
   position: relative;
   min-height: 34rem;
-  border-radius: 2.25rem;
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 1px solid rgba(22, 23, 26, 0.08);
-  background:
-    radial-gradient(circle at 25% 20%, rgba(144, 188, 188, 0.32), transparent 32%),
-    radial-gradient(circle at 74% 26%, rgba(221, 180, 153, 0.34), transparent 34%),
-    linear-gradient(180deg, rgba(252, 248, 242, 0.9), rgba(240, 233, 221, 0.62));
+  border: 1px solid var(--border-default);
+  background: var(--ambient-frame-bg);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 28px 90px rgba(92, 79, 66, 0.14);
+    inset 0 1px 0 var(--ambient-inset-glow),
+    var(--shadow-lg);
 }
 
 .grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(17, 18, 22, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 18, 22, 0.04) 1px, transparent 1px);
+    linear-gradient(var(--ambient-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ambient-grid-color) 1px, transparent 1px);
   background-size: 2.6rem 2.6rem;
   mask-image: radial-gradient(circle at center, black 30%, transparent 82%);
   opacity: 0.45;
@@ -30,23 +27,15 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
   filter: blur(8px);
+  will-change: transform;
 }
 
 .core {
   width: min(31vw, 26rem);
   aspect-ratio: 1;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 249, 243, 0.88), rgba(255, 249, 243, 0.1) 36%),
-    conic-gradient(
-      from 110deg,
-      rgba(122, 187, 191, 0.95),
-      rgba(255, 231, 207, 0.92),
-      rgba(122, 187, 191, 0.95)
-    );
+  background: var(--ambient-orb-core);
   opacity: 0.92;
-  box-shadow:
-    0 0 80px rgba(122, 187, 191, 0.22),
-    0 0 120px rgba(226, 179, 147, 0.26);
+  box-shadow: var(--ambient-core-shadow);
 }
 
 .secondary {
@@ -54,14 +43,7 @@
   aspect-ratio: 1;
   margin-left: 6rem;
   margin-top: 4rem;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 248, 239, 0.8), transparent 36%),
-    conic-gradient(
-      from 220deg,
-      rgba(237, 188, 160, 0.78),
-      rgba(157, 202, 204, 0.72),
-      rgba(237, 188, 160, 0.8)
-    );
+  background: var(--ambient-orb-secondary);
   opacity: 0.75;
 }
 
@@ -70,8 +52,7 @@
   aspect-ratio: 1;
   margin-left: -10rem;
   margin-top: -8rem;
-  background:
-    radial-gradient(circle, rgba(255, 253, 250, 0.9), rgba(255, 253, 250, 0.18) 55%, transparent 70%);
+  background: var(--ambient-orb-highlight);
 }
 
 .ring,
@@ -80,7 +61,7 @@
   inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(17, 18, 22, 0.1);
+  border: 1px solid var(--ambient-ring-color);
 }
 
 .ring {
@@ -99,7 +80,18 @@
   position: absolute;
   inset: auto 0 0;
   height: 8rem;
-  background: linear-gradient(180deg, transparent, rgba(248, 242, 235, 0.78));
+  background: linear-gradient(180deg, transparent, var(--ambient-haze-color));
+}
+
+.shimmer {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 40%;
+  height: 2px;
+  background: var(--ambient-shimmer-color);
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 @media (max-width: 900px) {
@@ -129,6 +121,10 @@
 
   .ringMinor {
     width: min(96vw, 33rem);
+  }
+
+  .shimmer {
+    display: none;
   }
 }
 

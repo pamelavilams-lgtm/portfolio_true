@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 
+import { SkipLink } from "@/components/portfolio/skip-link";
+import { ThemeProvider, themeScript } from "@/components/portfolio/theme-provider";
 import { siteContent } from "@/content/site-content";
 import { absoluteUrl, siteUrl } from "@/lib/site-url";
 
@@ -16,6 +18,15 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f9f4ed" },
+    { media: "(prefers-color-scheme: dark)", color: "#11161b" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -65,9 +76,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to Google Fonts for faster font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
+      </head>
       <body className={`${instrumentSans.variable} ${plexMono.variable}`}>
-        {children}
+        <SkipLink />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
