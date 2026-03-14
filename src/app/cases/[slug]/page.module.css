@@ -1,0 +1,277 @@
+.page {
+  width: var(--page-width);
+  margin: 0 auto;
+  padding: 1.6rem 0 3rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 23, 26, 0.12);
+  background: rgba(255, 255, 255, 0.52);
+  color: var(--ink-soft);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.backLink:hover {
+  transform: translateY(-2px);
+  border-color: rgba(22, 23, 26, 0.2);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.9fr);
+  gap: 2rem;
+  align-items: end;
+  margin-top: 2rem;
+}
+
+.heroCopy {
+  padding-right: 1rem;
+}
+
+.eyebrow,
+.sectionLabel,
+.metricName {
+  color: var(--ink-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  max-width: 13ch;
+  margin-top: 0.9rem;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.heroSummary,
+.heroOutcome,
+.railText,
+.sectionList,
+.artifactLink {
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.heroSummary {
+  max-width: 38rem;
+  margin-top: 1.4rem;
+  font-size: 1.08rem;
+}
+
+.heroOutcome {
+  max-width: 38rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(22, 23, 26, 0.1);
+}
+
+.heroTags {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.56);
+  color: var(--ink-soft);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.heroVisual {
+  min-width: 0;
+}
+
+.imageFrame {
+  position: relative;
+  min-height: 28rem;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(22, 23, 26, 0.1);
+  background:
+    radial-gradient(circle at top left, rgba(139, 183, 188, 0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(214, 169, 141, 0.22), transparent 30%),
+    rgba(255, 255, 255, 0.62);
+  box-shadow: var(--shadow-soft);
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+.contentColumn {
+  display: grid;
+  gap: 1rem;
+}
+
+.sectionCard,
+.railCard,
+.footerCard {
+  padding: 1.35rem;
+  border: 1px solid rgba(22, 23, 26, 0.1);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: var(--shadow-card);
+}
+
+.sectionList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+}
+
+.sectionList li::marker {
+  color: var(--accent-cool);
+}
+
+.rail {
+  min-width: 0;
+}
+
+.railCard {
+  position: sticky;
+  top: 1.5rem;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.railBlock {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.metricList {
+  display: grid;
+  gap: 0.7rem;
+  list-style: none;
+}
+
+.metricItem {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.85rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(22, 23, 26, 0.08);
+  background: rgba(246, 240, 232, 0.74);
+}
+
+.metricValue {
+  font-size: 1.4rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.artifactList {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.artifactLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.85rem;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.58);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.artifactLink:hover,
+.footerLink:hover {
+  transform: translateY(-2px);
+  border-color: rgba(22, 23, 26, 0.18);
+}
+
+.navigationFooter {
+  margin-top: 2rem;
+}
+
+.footerLinks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.footerLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.58);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .contentGrid,
+  .footerLinks {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTitle {
+    max-width: none;
+  }
+
+  .heroCopy {
+    padding-right: 0;
+  }
+
+  .imageFrame {
+    min-height: 20rem;
+  }
+
+  .railCard {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100vw - 1.5rem, 1240px);
+    padding-top: 1rem;
+  }
+
+  .imageFrame {
+    min-height: 16rem;
+  }
+}
